@@ -70,5 +70,14 @@ describe App::OutOfSyncService, type: :service do
     it 'returns discrepancies  logs' do
       is_expected.to eq(expected_output)
     end
+
+    context 'with missing url' do
+      it 'raises MalformedUrlError' do
+        expect { described_class.new(nil) }.to raise_error(
+          API::MalformedUrlError,
+          /Missing url/
+        )
+      end
+    end
   end
 end
